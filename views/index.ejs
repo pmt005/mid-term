@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Mid-term-market</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -12,12 +12,47 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
+  <header id="header">
+    <div id="top-left">
+      <div id="icon-title">
+        <img src="/icons/shop.png" id="titleIcon">
+        <span id="title">Mid-term Marketplace</span>
+      </div>
+
+      <span id="creators"><div><strong>GROUP TWO </strong>project eight<br></div></span>
+      <div id="header-footer">
+        <form action="/items" method="GET" id="keyword-search">
+          <textarea name="text" id="search-text" placeholder="search"></textarea>
+        </form>
+        <button type="submit" id="filter-button">filter</button>
+      </div>
+    </div>
+  <div id="top-right">
+    <div id="fav">
+      <button type="submit" class="user-icon"><img src="/icons/fav.png " id="icon"> </button>
+      <span id="creators"> <strong>Saved<br>Items</strong> </span>
+    </div>
+    <div id="fav">
+      <button type="submit" class="user-icon"><img src="/icons/sales.png" id = "icon"> </button>
+      <span id="creators"> <strong>Listed<br>Items</strong> </span>
+    </div>
+    <div id="fav">
+      <button type="submit" class="user-icon"><img src="/icons/post.png" id="icon"> </button>
+      <span id="creators"> <strong>Post<br>Item</strong> </span>
+    </div>
+
+
+  </div>
+  </header>
+
+
   <h1>Have fun! 🥔</h1>
 </body>
 
