@@ -37,16 +37,22 @@
     </div>
   <div id="top-right">
     <div id="fav">
-      <button type="submit" class="user-icon"><img src="/icons/fav.png " id="icon"> </button>
+      <form action="/saved" method="GET" id="saved-items">
+        <button type="submit" class="user-icon"><img src="/icons/fav.png " id="icon"> </button>
       <span id="creators"> <strong>Saved<br></strong></span>
+      </form>
     </div>
     <div id="fav">
-      <button type="submit" class="user-icon"><img src="/icons/sales.png" id = "icon"> </button>
-      <span id="creators"> <strong>Listed<br></strong></span>
+      <form action="/listed" method="GET" id="listed-tems">
+        <button type="submit" class="user-icon"><img src="/icons/sales.png" id = "icon"> </button>
+        <span id="creators"> <strong>Listed<br></strong></span>
+      </form>
     </div>
     <div id="fav">
-      <button type="submit" class="user-icon"><img src="/icons/post.png" id="icon"> </button>
-      <span id="creators"> <strong>Post<br></strong></span>
+      <form action="/post" method="GET" id="post-new-item">
+        <button type="submit" class="user-icon"><img src="/icons/post.png" id="icon"> </button>
+        <span id="creators"> <strong>Post<br></strong></span>
+      </form>
     </div>
   </div>
   </header>
