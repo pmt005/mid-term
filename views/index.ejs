@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/items.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/post-Item.css" type="text/css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -37,19 +38,19 @@
     </div>
   <div id="top-right">
     <div id="fav">
-      <form action="/saved" method="GET" id="saved-items">
+      <form action="/saved" method="GET" id="get-saved-items">
         <button type="submit" class="user-icon"><img src="/icons/fav.png " id="icon"> </button>
       <span id="creators"> <strong>Saved<br></strong></span>
       </form>
     </div>
     <div id="fav">
-      <form action="/listed" method="GET" id="listed-tems">
+      <form action="/listed" method="GET" id="get-listed-items">
         <button type="submit" class="user-icon"><img src="/icons/sales.png" id = "icon"> </button>
         <span id="creators"> <strong>Listed<br></strong></span>
       </form>
     </div>
     <div id="fav">
-      <form action="/post" method="GET" id="post-new-item">
+      <form action="/post" method="GET" id="get-post-form">
         <button type="submit" class="user-icon"><img src="/icons/post.png" id="icon"> </button>
         <span id="creators"> <strong>Post<br></strong></span>
       </form>
@@ -58,7 +59,45 @@
   </header>
 
 <!-- Page-specific (main) content here -->
-<main class="container">
+<main id="container">
+  <section id="post-form-container">
+    <div id="post-new-item-div">
+      <header id="post-form-header">
+        <span id="post-title">Post Ad<span>
+      </header>
+      <form action="/items" method="POST" id="post-form-input"></form>
+        <div class="entire-div">
+          <div class="input-group" id="left-side">
+            <span id="pForm-titles">Ad title</span>
+            <textarea name="text" class="input-text" id="title-input"></textarea>
+            <span id="pForm-titles">Description</span>
+            <textarea name="text" class="input-text" id="desc-input-area"></textarea>
+            <span id="pForm-titles">Price</span>
+            <textarea name="text" class="input-text" id="price-input"></textarea>
+            <span id="pForm-titles">Cover photo</span>
+            <textarea name="text" class="input-text" id="cover-photo"></textarea>
+          </div>
+          <div class="input-group" id="right-side">
+            <span id="pForm-titles">Alternate photo 1</span>
+            <textarea name="text" class="input-text" id="a-photo1-input"></textarea>
+            <span id="pForm-titles">Alternate photo 2</span>
+            <textarea name="text" class="input-text" id="a-photo2-input"></textarea>
+            <span id="pForm-titles">City</span>
+            <textarea name="text" class="input-text" id="city-input"></textarea>
+            <span id="pForm-titles">Province</span>
+            <textarea name="text" class="input-text" id="province-input"></textarea>
+            <span id="pForm-titles">Community</span>
+            <textarea name="text" class="input-text" id="community-input"></textarea>
+            <div id="post-footer">
+              <img src="/icons/submit.png" id="submit-icon">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+
   <article class="item">
     <img class="thumbnail_photo1" src="/temp-images/thumbnail_1 Small.png">
     <div id="item-info">
