@@ -18,6 +18,47 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <style>
+    /* Add your custom CSS styles here */
+    .filter-options {
+      margin-bottom: 20px;
+    }
+
+    .filter-options label {
+      font-weight: bold;
+    }
+
+    .filter-options select {
+      padding: 5px;
+    }
+
+    .user-login form {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-login input[type="text"],
+    .user-login input[type="password"] {
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    .user-login button {
+      padding: 5px 10px;
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+    }
+
+    .user-login span {
+      margin: 0 10px;
+    }
+
+    .user-login a {
+      color: #337ab7;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -57,6 +98,26 @@
     </div>
   </div>
   </header>
+  <!-- Filter Options -->
+  <div class="filter-options">
+    <label for="filter">Filter:</label>
+    <select id="filter">
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+  </div>
+
+  <!-- Login/Register Form -->
+  <div class="user-login">
+    <form>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button type="submit">Login</button>
+      <span>or</span>
+      <a href="#">Register</a>
+    </form>
+  </div>
 
 <!-- Page-specific (main) content here -->
 <main id="container">
