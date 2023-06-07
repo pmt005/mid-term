@@ -58,7 +58,8 @@ $(() => {
     //Listener for post new item submit to get post new item form
     $("#get-post-form").on('click', function(event) {
       event.preventDefault();
-      $postForm.slideToggle();
+      console.log("made it here");
+      views_manager.show('newItem');
     });
 
     //Listener for get listed items
@@ -73,6 +74,6 @@ $(() => {
       $savedItems.slideToggle();
       console.log("saved button");
     });
-  })
+  });
 
 });

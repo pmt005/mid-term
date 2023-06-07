@@ -8,8 +8,25 @@
 const express = require('express');
 const router  = express.Router();
 
+router.post("/items", (req,res) => {
+  const userId = 1;
+  if (!userId) {
+    return res.send({ error: "error" });
+  }
+  database
+    .getAllItems(userId)
+    .then((items) => res.send({ items }))
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+})
+
+
 router.get('/', (req, res) => {
   res.render('users');
-}); 
+});
+
+
 
 module.exports = router;
