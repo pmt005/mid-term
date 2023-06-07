@@ -1,0 +1,38 @@
+.filter-options {
+  margin-bottom: 20px;
+}
+
+.filter-options label {
+  font-weight: bold;
+}
+
+.filter-options select {
+  padding: 5px;
+}
+
+.user-login form {
+  display: flex;
+  align-items: center;
+}
+
+.user-login input[type="text"],
+.user-login input[type="password"] {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.user-login button {
+  padding: 5px 10px;
+  background-color: #337ab7;
+  color: #fff;
+  border: none;
+}
+
+.user-login span {
+  margin: 0 10px;
+}
+
+.user-login a {
+  color: #337ab7;
+  text-decoration: none;
+}

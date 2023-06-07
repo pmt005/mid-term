@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-
 $(document).ready(function() {
+  //const { addItem } = require('../db/queries/items');
 
 
 
@@ -44,23 +44,25 @@ $(document).ready(function() {
   </section>
   `);
 
+
   window.$newItemForm = $newItemForm;
-/*
-  $("#post-form-input").on('click', function(event) {
-    event.preventDefault();
-    console.log("Testing testing 123");
-  });
-*/
+
   $newItemForm.submit(function(event) {
     event.preventDefault();
     console.log("Testing post");
-    const $newItem = $(this).serialize();
+    const $newItem = $(this).find("#title-text").serialize();
     $.post("/api/users/items",$newItem)
       .then(() => {
         console.log("This is wehre I need to be");
+        console.log('first value:', event.target[0].value);
+        /*const returnItem = {
+          owner_id: 1,
+          title:
+        }
+        //addItem(newItem);
+        //views_manager.show('item');
+*/
       });
-
-
   });
 
 });

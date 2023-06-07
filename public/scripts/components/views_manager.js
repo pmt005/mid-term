@@ -8,11 +8,14 @@ $(document).ready(function() {
 
   window.views_manager.show = function(item) {
     $newItemForm.detach();
-
+    $shallowItemListings.detach();
 
     switch (item) {
     case 'newItem':
       $newItemForm.prependTo($main);
+      break;
+    case 'listings':
+      $shallowItemListings.appendTo($main);
       break;
     case 'error': {
       const $error = $(`<p>${arguments[1]}</p>`);

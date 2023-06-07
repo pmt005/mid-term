@@ -1,13 +1,15 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-style */
+
+
 $(document).ready(function() {
   window.header = {};
 
   const $pageHeader = $('#page-header');
   function updateHeader() {
 
-    let userLinks;
-    userLinks = `
+    let header;
+    header = `
       <header id="header">
       <div id="top-left">
         <div id="icon-title">
@@ -19,6 +21,7 @@ $(document).ready(function() {
         <div id="header-footer">
           <form action="/items" method="GET" id="keyword-search">
             <textarea name="text" id="search-text" placeholder="search"></textarea>
+            <button type="submit" id="keyword-search-button">submit</button>
           </form>
           <button type="submit" id="filter-button">filter</button>
         </div>
@@ -47,18 +50,40 @@ $(document).ready(function() {
 
       `;
 
-    $pageHeader.append(userLinks);
+    $pageHeader.append(header);
   }
-  updateHeader();
   window.header.update = updateHeader;
+  updateHeader();
 
-
+  const $keywordSearch = $pageHeader.find("#keyword-search");
   const $postForm = $("#container-to-vanish-post-form");
   const $savedItems = $postForm.parent().find("#container-to-vanish-saved");
+
   //Listener for post new item submit to get post new item form
   $("#get-post-form").on('click', function(event) {
     event.preventDefault();
+    console.log("arrived");
     views_manager.show('newItem');
+  });
+
+
+  function getAllItems(inputParam) {
+    let url = "/api/users/items";
+    if (inputParam) {
+      url += "?" + inputParam;
+    }
+    return $.ajax(url,{method: 'GET'});
+  }
+
+  $keywordSearch.submit(function(event) {
+    event.preventDefault();
+    const data = $(this).serialize();
+    console.log("keyword search data: " + data);
+    getAllItems(data).then(function(json) {
+      shallowItemListings.addShallowListings(json.items);
+      views_manager.show('items');
+    })
+
   });
 
   //Listener for get listed items
@@ -67,7 +92,7 @@ $(document).ready(function() {
     console.log("listed button");
   });
 
-  //Listener for post new item submit to get post new item form
+  //Listener for saved items
   $("#get-saved-items").submit(function(event) {
     event.preventDefault();
     $savedItems.slideToggle();

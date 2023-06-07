@@ -12,11 +12,22 @@ const getItems = function(options, limit = 10) {
   const queryParams = [];
   let queryCondition = '';
 
+
   let queryString = `
   SELECT *
   FROM items
+  WHERE 1 = 1
   `;
 
+  console.log("this is the options val: " , options);
+
+  if (options.text) {
+    queryParams.push(`%${options.text}%`);
+    queryCondition += `AND city LIKE $${queryParams.length} `;
+  }
+
+
+  /*
   if (options.title) {
     queryParams.push(`%${options.title}%`);
     queryCondition += !queryCondition ? `WHERE title LIKE $${queryParams.length} ` : `AND title LIKE $${queryParams.length} `;
@@ -56,21 +67,23 @@ const getItems = function(options, limit = 10) {
     queryParams.push(options.status);
     queryCondition += !queryCondition ? `WHERE status = $${queryParams.length} ` : `AND status = $${queryParams.length} `;
   }
+  */
 
   queryString += queryCondition;
 
-  queryString += `
-  ORDER BY price
-  LIMIT $${queryParams.length};
-  `;
-
-  return pool.query(queryString, queryParams)
+  // queryString += `
+  // LIMIT $${queryParams.length};
+  // `;
+  console.log(queryString, queryParams);
+  return db.query(queryString, queryParams)
     .then((res) => res.rows)
     .catch((err) => {
       console.log(err.message);
       throw err;
     });
 };
+
+
 
 /**
  * Add an item to the database

@@ -1,0 +1,99 @@
+#container-to-vanish-post-form{
+  width:100%;
+
+}
+
+#post-form-header{
+  width: 100%;
+  height: 2.5rem;
+  background-color: aliceblue;
+  border: solid rgba(0, 0, 0, 0.644);
+  border-radius: 1rem;
+  border: solid rgba(123, 124, 131, 0.712) 2px;
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+}
+.entire-div{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+#post-new-item-div{
+  display: flex;
+  width: 100%;
+  margin-top: 0;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+#right-side{
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+#post-form-input {
+  display: flex;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width:50%
+}
+
+#post-title{
+  color: rgba(127, 123, 131, 0.712);
+  font-size: 1.8rem;
+  padding-top: 0.1rem;
+}
+
+#pForm-titles{
+  font-size: 1.3rem;
+  padding-top: 0.8rem;
+  padding-left: 0.8rem;
+  display: flex;
+  justify-content: start;
+  width: 75%;
+}
+
+.title-text{
+
+  width: 50%;
+  border: solid rgba(127, 123, 131, 0.712) 2px;
+  border-radius: 1rem;
+}
+
+.input-text{
+  width: 75%;
+  height: 3rem;
+  border: solid rgba(127, 123, 131, 0.712) 2px;
+  border-radius: 0.3rem;
+  padding: 0.4rem;
+  font-size: 1.5rem;
+}
+
+#desc-input-area{
+  height: 7rem;
+}
+
+#submit-icon{
+  height: 5rem;
+  width: 6rem;
+  padding-top: 0.5rem;
+}
+
+#submit-button{
+  cursor: pointer;
+  border: hidden;
+  border-radius: 0.5rem;
+  background: transparent;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+#submit-button:hover {
+  box-shadow:  3px 3px 7px rgba(0,0,0,0.25)
+}

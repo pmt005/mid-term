@@ -9,6 +9,7 @@
 const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
+const {getItems} = require('../db/queries/items');
 const database = require("../db/connection");
 
 router.post("/items", (req,res) => {
@@ -30,8 +31,21 @@ router.post("/items", (req,res) => {
     });
     */
 
-   res.send("this works ");
+  res.send("this works ");
 });
+
+router.get("/items", (req, res) => {
+console.log("This is req.query" , req.query);
+  getItems(req.query, 5)
+    .then((items) => res.send({ items }))
+    .catch((e) => {
+      console.error(e);
+      console.log("This is the error");
+      res.send(e);
+    });
+});
+
+
 
 router.get('/', (req, res) => {
   userQueries.getUsers()
