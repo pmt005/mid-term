@@ -10,8 +10,27 @@ const { getUserWithId } = require('../db/queries/users');
 const router  = express.Router();
 
 
+// MAHDI HTML FOR LOG IN
+// <!-- Filter Options -->
+//   <div class="filter-options">
+//     <label for="filter">Filter:</label>
+//     <select id="filter">
+//       <option value="option1">Option 1</option>
+//       <option value="option2">Option 2</option>
+//       <option value="option3">Option 3</option>
+//     </select>
+//   </div>
 
-
+//   <!-- Login/Register Form -->
+//   <div class="user-login">
+//     <form>
+//       <input type="text" id="username" placeholder="Username">
+//       <input type="password" id="password" placeholder="Password">
+//       <button type="submit">Login</button>
+//       <span>or</span>
+//       <a href="#">Register</a>
+//     </form>
+//   </div>
 
 
 

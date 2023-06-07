@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 $(() => {
 
-  const $shallowItemListings = $(``);
+  const $shallowItemListings = $(`<div id="shallow"></div>`);
 
   window.$shallowItemListings = $shallowItemListings;
 
@@ -21,9 +22,11 @@ $(() => {
     clearShallowListings();
     for (const itemId in items) {
       const item = items[itemId];
-      const shallowListing = shallowItemListing.createListing(item);
+      const shallowListing = shallowItemListing.createShallowListing(item);
+      //console.log(shallowListing);
       addShallowListing(shallowListing);
     }
+    window.views_manager.show("listings", $shallowItemListings);
   };
   window.shallowItemListings.addShallowListings = addShallowListings;
 

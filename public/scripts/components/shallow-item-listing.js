@@ -17,7 +17,7 @@ $(() => {
     `;
   };
 
-  window.shallowItemListing.createListing = createShallowListing;
+  window.shallowItemListing.createShallowListing = createShallowListing;
 
 
 

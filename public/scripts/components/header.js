@@ -80,6 +80,7 @@ $(document).ready(function() {
     const data = $(this).serialize();
     console.log("keyword search data: " + data);
     getAllItems(data).then(function(json) {
+      console.log(json.items);
       shallowItemListings.addShallowListings(json.items);
       views_manager.show('items');
     })

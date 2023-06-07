@@ -9,7 +9,7 @@
 const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
-const {getItems} = require('../db/queries/items');
+const {getItemsShallow} = require('../db/queries/items');
 const database = require("../db/connection");
 
 router.post("/items", (req,res) => {
@@ -36,7 +36,7 @@ router.post("/items", (req,res) => {
 
 router.get("/items", (req, res) => {
 console.log("This is req.query" , req.query);
-  getItems(req.query, 5)
+  getItemsShallow(req.query, 5)
     .then((items) => res.send({ items }))
     .catch((e) => {
       console.error(e);

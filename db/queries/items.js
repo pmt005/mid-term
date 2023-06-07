@@ -13,21 +13,15 @@ const getItems = function(options, limit = 10) {
   let queryCondition = '';
 
 
+
   let queryString = `
   SELECT *
   FROM items
-  WHERE 1 = 1
   `;
 
-  console.log("this is the options val: " , options);
-
-  if (options.text) {
-    queryParams.push(`%${options.text}%`);
-    queryCondition += `AND city LIKE $${queryParams.length} `;
-  }
 
 
-  /*
+
   if (options.title) {
     queryParams.push(`%${options.title}%`);
     queryCondition += !queryCondition ? `WHERE title LIKE $${queryParams.length} ` : `AND title LIKE $${queryParams.length} `;
@@ -67,8 +61,40 @@ const getItems = function(options, limit = 10) {
     queryParams.push(options.status);
     queryCondition += !queryCondition ? `WHERE status = $${queryParams.length} ` : `AND status = $${queryParams.length} `;
   }
-  */
 
+
+  queryString += queryCondition;
+
+  queryString += `
+  ORDER BY price
+  LIMIT $${queryParams.length};
+  `;
+
+  return db.query(queryString, queryParams)
+    .then((res) => res.rows)
+    .catch((err) => {
+      console.log(err.message);
+      throw err;
+    });
+};
+
+const getItemsShallow = function(options) {
+  const queryParams = [];
+  let queryCondition = '';
+
+
+  let queryString = `
+  SELECT *
+  FROM items
+  WHERE 1 = 1
+  `;
+
+  console.log("this is the options val: " , options);
+
+  if (options.text) {
+    queryParams.push(`%${options.text}%`);
+    queryCondition += `OR city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} `;
+  }
   queryString += queryCondition;
 
   // queryString += `
@@ -133,4 +159,4 @@ const updateItemStatusWithItemId = function(item) {
     });
 };
 
-module.exports = { getItems, addItem, updateItemStatusWithItemId };
+module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow };
