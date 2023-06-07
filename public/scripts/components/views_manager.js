@@ -6,16 +6,16 @@ $(document).ready(function() {
 
   window.views_manager = {};
 
-  window.views_manager.show = function(displayType, inputItems) {
-     $newItemForm.detach();
-    // $shallowItemListings.detach();
-    console.log(inputItems);
+  window.views_manager.show = function(displayType) {
+    $newItemForm.detach();
+    $shallowItemListings.detach();
+
     switch (displayType) {
     case 'newItem':
       $newItemForm.prependTo($main);
       break;
-    case 'listings':
-      inputItems.prependTo($main);
+    case 'shallowListings':
+      $shallowItemListings.prependTo($main);
       break;
     case 'error': {
       const $error = $(`<p>${arguments[1]}</p>`);

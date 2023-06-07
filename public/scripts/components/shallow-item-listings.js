@@ -13,7 +13,7 @@ $(() => {
 
 
   const clearShallowListings = function() {
-    $shallowItemListings.empty;
+    $shallowItemListings.empty();
   };
 
   window.shallowItemListings.clearShallowListings = clearShallowListings;

@@ -82,7 +82,7 @@ $(document).ready(function() {
     getAllItems(data).then(function(json) {
       console.log(json.items);
       shallowItemListings.addShallowListings(json.items);
-      views_manager.show('items');
+      views_manager.show('shallowListings');
     })
 
   });

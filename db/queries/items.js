@@ -82,18 +82,16 @@ const getItemsShallow = function(options) {
   const queryParams = [];
   let queryCondition = '';
 
-
   let queryString = `
   SELECT *
   FROM items
-  WHERE 1 = 1
   `;
 
   console.log("this is the options val: " , options);
 
   if (options.text) {
     queryParams.push(`%${options.text}%`);
-    queryCondition += `OR city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} `;
+    queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} `;
   }
   queryString += queryCondition;
 
