@@ -41,6 +41,7 @@ const runResetDB = async () => {
 
     await runSchemaFiles();
     await runSeedFiles();
+    console.log("CONNECTED TO THE DATABASE");
     process.exit();
   } catch (err) {
     console.error(chalk.red(`Failed due to error: ${err}`));

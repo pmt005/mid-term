@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 
-$(() => {
+$(document).ready(function() {
 
 
 
@@ -8,7 +9,7 @@ $(() => {
       <header id="post-form-header">
         <span id="post-title">Post Ad<span>
       </header>
-      <form action="/items" method="POST" id="post-form-input"></form>
+      <form action="/api/users/items" method="POST" id="post-form-input">
         <div class="entire-div">
           <div class="input-group" id="left-side">
             <span id="pForm-titles">Ad title</span>
@@ -32,7 +33,9 @@ $(() => {
             <span id="pForm-titles">Community</span>
             <textarea name="text" class="input-text" id="community-input"></textarea>
             <div id="post-footer">
+              <button type="submit" id="submit-button">
               <img src="/icons/submit.png" id="submit-icon">
+              </button>
             </div>
           </div>
         </div>
@@ -42,5 +45,22 @@ $(() => {
   `);
 
   window.$newItemForm = $newItemForm;
+/*
+  $("#post-form-input").on('click', function(event) {
+    event.preventDefault();
+    console.log("Testing testing 123");
+  });
+*/
+  $newItemForm.submit(function(event) {
+    event.preventDefault();
+    console.log("Testing post");
+    const $newItem = $(this).serialize();
+    $.post("/api/users/items",$newItem)
+      .then(() => {
+        console.log("This is wehre I need to be");
+      });
+
+
+  });
 
 });

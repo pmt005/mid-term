@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /*
  * All routes for User Data are defined here
  * Since this file is loaded in server.js into api/users,
@@ -8,6 +9,29 @@
 const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
+const database = require("../db/connection");
+
+router.post("/items", (req,res) => {
+
+  const userId = 1;
+  if (!userId) {
+    return res.send({ error: "error" });
+  }
+
+
+  const newItem = req.body;
+  newItem.owner_id = userId;
+  /*database
+    .addItem(newItem)
+    .then((item) => res.send({ item }))
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+    */
+
+   res.send("this works ");
+});
 
 router.get('/', (req, res) => {
   userQueries.getUsers()

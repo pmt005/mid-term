@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-style */
-$(() => {
+$(document).ready(function() {
   window.header = {};
 
   const $pageHeader = $('#page-header');
@@ -52,28 +52,27 @@ $(() => {
   updateHeader();
   window.header.update = updateHeader;
 
-  $(document).ready(function() {
-    const $postForm = $("#container-to-vanish-post-form");
-    const $savedItems = $postForm.parent().find("#container-to-vanish-saved");
-    //Listener for post new item submit to get post new item form
-    $("#get-post-form").on('click', function(event) {
-      event.preventDefault();
-      console.log("made it here");
-      views_manager.show('newItem');
-    });
 
-    //Listener for get listed items
-    $("#get-listed-items").submit(function(event) {
-      event.preventDefault();
-      console.log("listed button");
-    });
-
-    //Listener for post new item submit to get post new item form
-    $("#get-saved-items").submit(function(event) {
-      event.preventDefault();
-      $savedItems.slideToggle();
-      console.log("saved button");
-    });
+  const $postForm = $("#container-to-vanish-post-form");
+  const $savedItems = $postForm.parent().find("#container-to-vanish-saved");
+  //Listener for post new item submit to get post new item form
+  $("#get-post-form").on('click', function(event) {
+    event.preventDefault();
+    views_manager.show('newItem');
   });
+
+  //Listener for get listed items
+  $("#get-listed-items").submit(function(event) {
+    event.preventDefault();
+    console.log("listed button");
+  });
+
+  //Listener for post new item submit to get post new item form
+  $("#get-saved-items").submit(function(event) {
+    event.preventDefault();
+    $savedItems.slideToggle();
+    console.log("saved button");
+  });
+
 
 });
