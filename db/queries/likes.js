@@ -7,7 +7,7 @@ const db = require('../connection');
  * @return {Promise<{}>} A promise to the likes.
  */
 const addLike = function(like) {
-  return pool
+  return db
     .query(
       `INSERT INTO likes
     (user_id, item_id)
@@ -32,7 +32,7 @@ const addLike = function(like) {
  * @return {Promise<{}>} A promise to the likes of the user.
  */
 const getLikesWithUserId = function(user_id) {
-  return pool
+  return db
     .query(
       `SELECT *
     FROM likes

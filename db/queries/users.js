@@ -8,7 +8,7 @@ const db = require('../connection');
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithEmail = function(email) {
-  return pool
+  return db
     .query(
       `SELECT *
     FROM users
@@ -29,7 +29,7 @@ const getUserWithEmail = function(email) {
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = function(id) {
-  return pool
+  return db
     .query(
       `SELECT *
     FROM users
@@ -50,7 +50,7 @@ const getUserWithId = function(id) {
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser = function(user) {
-  return pool
+  return db
     .query(
       `INSERT INTO users (name, email, password)
     VALUES ($1, $2, $3)

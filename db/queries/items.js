@@ -115,7 +115,7 @@ const getItemsShallow = function(options) {
  * @return {Promise<{}>} A promise to the items.
  */
 const addItem = function(item) {
-  return pool
+  return db
     .query(
       `INSERT INTO items
     (owner_id, title, description, price, cover_photo_url, thumbnail_photo1_url, thumbnail_photo2_url, thumbnail_photo3_url,
@@ -142,7 +142,7 @@ const addItem = function(item) {
  * @return {Promise<{}>} A promise to the items.
  */
 const updateItemStatusWithItemId = function(item) {
-  return pool
+  return db
     .query(
       `UPDATE items
       SET status = $1

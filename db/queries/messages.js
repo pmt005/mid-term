@@ -7,7 +7,7 @@ const db = require('../connection');
  * @return {Promise<{}>} A promise to the messages.
  */
 const addMessage = function(message) {
-  return pool
+  return db
     .query(
       `INSERT INTO messages
     (message, sent_time, sender_id, receiver_id, item_id)
@@ -33,7 +33,7 @@ const addMessage = function(message) {
  * @return {Promise<{}>} A promise to the messages of the item between two users.
  */
 const getMessages = function(ids) {
-  return pool
+  return db
     .query(
       `SELECT *
     FROM messages
