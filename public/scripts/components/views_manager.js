@@ -9,6 +9,7 @@ $(document).ready(function() {
   window.views_manager.show = function(displayType) {
     $newItemForm.detach();
     $shallowItemListings.detach();
+    $standby.detach();
 
     switch (displayType) {
     case 'newItem':
@@ -16,6 +17,9 @@ $(document).ready(function() {
       break;
     case 'shallowListings':
       $shallowItemListings.prependTo($main);
+      break;
+    case 'standby':
+      $standby.prependTo($main);
       break;
     case 'error': {
       const $error = $(`<p>${arguments[1]}</p>`);
