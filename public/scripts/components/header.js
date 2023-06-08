@@ -68,7 +68,7 @@ $(document).ready(function() {
 
 
   function getAllItems(inputParam) {
-    let url = "/api/users/items";
+    let url = "/api/items";
     if (inputParam) {
       url += "?" + inputParam;
     }
@@ -83,7 +83,7 @@ $(document).ready(function() {
       console.log(json.items);
       shallowItemListings.addShallowListings(json.items);
       views_manager.show('shallowListings');
-    })
+    });
 
   });
 
