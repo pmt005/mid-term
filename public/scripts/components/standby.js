@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
 
-  const $standby = $(`<div id="standby"></div>`);
+  const $standby = $(`<div class="item-display" id="standby"></div>`);
 
   window.$standby = $standby;
 
