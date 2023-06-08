@@ -18,3 +18,4 @@ $(() => {
   };
 
   window.deepItemListing.createListing = createDeepListing;
+});

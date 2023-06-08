@@ -9,7 +9,7 @@
 const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
-const {getItemsShallow} = require('../db/queries/items');
+//const {getItemsShallow} = require('../db/queries/items');
 const database = require("../db/connection");
 
 router.post("/items", (req,res) => {

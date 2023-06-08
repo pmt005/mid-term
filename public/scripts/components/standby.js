@@ -26,11 +26,13 @@ $(document).ready(function() {
       const randomIndex = Math.floor(Math.random() * 9);
       const items = inputItems[randomIndex];
       const shallowListing = shallowItemListing.createShallowListing(items);
-      console.log(shallowListing);
+      //console.log(shallowListing);
       addStandbyListing(shallowListing);
     }
   };
   window.standby.addStandbyListings = addStandbyListings;
+
+
 
   // const inputItems = getItemsShallow("");
   // addStandbyListings(json.items);

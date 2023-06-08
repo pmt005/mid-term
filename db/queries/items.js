@@ -157,5 +157,6 @@ const updateItemStatusWithItemId = function (item) {
         throw err;
       });
   };
+};
 
-  module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow };
+module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow };
