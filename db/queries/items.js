@@ -91,7 +91,7 @@ const getItemsShallow = function (options) {
 
   if (options.text) {
     queryParams.push(`%${options.text}%`);
-    queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} `;
+    queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} OR title LIKE $${queryParams.length} `;
   }
   queryString += queryCondition;
 
@@ -142,19 +142,20 @@ const addItem = function (item) {
  * @return {Promise<{}>} A promise to the items.
  */
 const updateItemStatusWithItemId = function (item) {
-  return db
-    .query(
-      `UPDATE items
+  const updateItemStatusWithItemId = function (item) {
+    return db
+      .query(
+        `UPDATE items
       SET status = $1
       WHERE item_id = $2;`,
-      [item])
-    .then((result) => {
-      return result.rows;
-    })
-    .catch((err) => {
-      console.log(err.message);
-      throw err;
-    });
-};
+        [item])
+      .then((result) => {
+        return result.rows;
+      })
+      .catch((err) => {
+        console.log(err.message);
+        throw err;
+      });
+  };
 
-module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow };
+  module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow };

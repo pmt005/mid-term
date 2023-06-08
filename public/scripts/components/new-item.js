@@ -88,6 +88,7 @@ $(document).ready(function () {
         console.error("Error posting item:", error);
         // Handle error response here
       });
+
   });
 
   // Append the new item form to the document

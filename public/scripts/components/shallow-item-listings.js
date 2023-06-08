@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 $(() => {
 
-  const $shallowItemListings = $(`<div id="shallow"></div>`);
+  const $shallowItemListings = $(`<div class="item-display" id="shallow"></div>`);
 
   window.$shallowItemListings = $shallowItemListings;
 

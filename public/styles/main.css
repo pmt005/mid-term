@@ -20,7 +20,7 @@ body {
   border: solid rgba(127, 123, 131, 0.712) 2px;
   border-radius: 1rem;
   margin-top: 15rem;
-  height: 80%;
+  height: 75%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,4 +31,10 @@ body {
 
 #container::-webkit-scrollbar {
   border-radius: 1rem;
+}
+
+.item-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
