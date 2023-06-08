@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-$(document).ready(function() {
+$(document).ready(function () {
   //const { addItem } = require('../db/queries/items');
 
 
@@ -45,26 +45,52 @@ $(document).ready(function() {
   `);
 
 
+  // Make the $newItemForm accessible globally
   window.$newItemForm = $newItemForm;
 
-  $newItemForm.submit(function(event) {
+  // Add a submit event handler to the form
+  $newItemForm.submit(function (event) {
     event.preventDefault();
-    console.log("Testing post");
-    const $newItem = $(this).find("#title-text").serialize();
-    $.post("/api/users/items",$newItem)
-      .then(() => {
-        console.log("This is wehre I need to be");
-        console.log('first value:', event.target[0].value);
-        /*const returnItem = {
-          owner_id: 1,
-          title:
-        }
-        //addItem(newItem);
-        //views_manager.show('item');
-*/
 
+    // Retrieve form inputs using jQuery selectors
+    const $form = $(this);
+    const title = $form.find("#title-input").val();
+    const description = $form.find("#desc-input-area").val();
+    const price = $form.find("#price-input").val();
+    const coverPhoto = $form.find("#cover-photo").val();
+    const altPhoto1 = $form.find("#a-photo1-input").val();
+    const altPhoto2 = $form.find("#a-photo2-input").val();
+    const city = $form.find("#city-input").val();
+    const province = $form.find("#province-input").val();
+    const community = $form.find("#community-input").val();
+
+    // Create an object containing the form data
+    const newItem = {
+      title: title,
+      description: description,
+      price: price,
+      coverPhoto: coverPhoto,
+      altPhoto1: altPhoto1,
+      altPhoto2: altPhoto2,
+      city: city,
+      province: province,
+      community: community
+    };
+
+    // Send an AJAX POST request to the server using $.post()
+    $.post("/api/items", newItem)
+      .done(function (response) {
+        console.log("Item posted successfully!");
+        console.log(response);
+        // Handle success response here
+      })
+      .fail(function (xhr, status, error) {
+        console.error("Error posting item:", error);
+        // Handle error response here
       });
 
   });
 
+  // Append the new item form to the document
+  // $("body").append($newItemForm);
 });
