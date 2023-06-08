@@ -34,7 +34,7 @@ router.post("/items", (req,res) => {
 });
 
 router.get("/items", (req, res) => {
-console.log("This is the new route" , req.query);
+  console.log("This is the new route" , req.query);
   getItemsShallow(req.query, 5)
     .then((items) => res.send({ items }))
     .catch((e) => {

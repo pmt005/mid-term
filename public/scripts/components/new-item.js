@@ -62,7 +62,9 @@ $(document).ready(function() {
         //addItem(newItem);
         //views_manager.show('item');
 */
+
       });
+
   });
 
 });
