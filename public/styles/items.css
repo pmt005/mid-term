@@ -10,6 +10,13 @@
   flex-wrap: wrap;
 }
 
+.thumbnail_photo1 {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  width: 100%;
+}
+
+
 #saved-items{
   width:100%;
   display: none;
@@ -41,6 +48,3 @@
 }
 
 
-.thumbnail_photo1 {
-  width: 100%;
-}

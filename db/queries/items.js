@@ -91,7 +91,7 @@ const getItemsShallow = function(options) {
 
   if (options.text) {
     queryParams.push(`%${options.text}%`);
-    queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} `;
+    queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} OR title LIKE $${queryParams.length} `;
   }
   queryString += queryCondition;
 

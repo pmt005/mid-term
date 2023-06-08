@@ -20,10 +20,10 @@ $(document).ready(function() {
         <span id="creators"><div><strong>GROUP TWO </strong>project eight<br></div></span>
         <div id="header-footer">
           <form action="/items" method="GET" id="keyword-search">
-            <textarea name="text" id="search-text" placeholder="search"></textarea>
-            <button type="submit" id="keyword-search-button">submit</button>
+              <input type="text" name="text" id="search-text" placeholder="search"></textarea>
+              <button type="submit" class ="filter-button" id="keyword-search-button">Search</button>
           </form>
-          <button type="submit" id="filter-button">filter</button>
+          <button type="submit" class="filter-button">filter</button>
         </div>
       </div>
     <div id="top-right">
