@@ -6,14 +6,14 @@ const db = require('../connection');
  * @param {{}} property An object containing all of the like details.
  * @return {Promise<{}>} A promise to the likes.
  */
-const addLike = function(like) {
-  return pool
+const addLike = function (like) {
+  return db
     .query(
       `INSERT INTO likes
     (user_id, item_id)
     VALUES ($1, $2 )
     RETURNING *;`,
-      [like.user_id, like.item_id ])
+      [like.user_id, like.item_id])
     .then((result) => {
       console.log(result);
       return result.rows;
@@ -31,8 +31,8 @@ const addLike = function(like) {
  * @param {Integer} user_id The id of the user.
  * @return {Promise<{}>} A promise to the likes of the user.
  */
-const getLikesWithUserId = function(user_id) {
-  return pool
+const getLikesWithUserId = function (user_id) {
+  return db
     .query(
       `SELECT *
     FROM likes

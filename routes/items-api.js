@@ -7,34 +7,32 @@
  */
 
 const express = require('express');
-const router  = express.Router();
-const {getItemsShallow} = require('../db/queries/items');
+const router = express.Router();
+const { getItemsShallow, getItems, addItem } = require('../db/queries/items');
 const database = require("../db/connection");
+const db = require('../db/connection');
 
-router.post("/items", (req,res) => {
+router.post("/items", (req, res) => {
+  const userId = 1; // Assuming the user ID is hardcoded as 1 for now
 
-  const userId = 1;
   if (!userId) {
-    return res.send({ error: "error" });
+    return res.send({ error: "error" }); // If userId is falsy, send an error response
   }
 
+  const newItem = req.body; // Get the new item from the request body
+  newItem.owner_id = userId; // Assign the userId as the owner_id of the new item
 
-  const newItem = req.body;
-  newItem.owner_id = userId;
-  /*database
-    .addItem(newItem)
-    .then((item) => res.send({ item }))
+  addItem(newItem) // Add the new item to the database
+    .then((item) => res.send({ item })) // If successful, send the added item as a response
     .catch((e) => {
       console.error(e);
-      res.send(e);
+      res.send(e); // If there's an error, send the error object as a response
     });
-    */
-
-  res.send("this works ");
 });
 
+
 router.get("/items", (req, res) => {
-console.log("This is the new route" , req.query);
+  console.log("This is the new route", req.query);
   getItemsShallow(req.query, 5)
     .then((items) => res.send({ items }))
     .catch((e) => {
@@ -43,6 +41,7 @@ console.log("This is the new route" , req.query);
       res.send(e);
     });
 });
+
 
 
 

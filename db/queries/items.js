@@ -8,7 +8,7 @@ const db = require('../connection');
  * @param {*} limit The number of results to return.
  * @return {Promise<[{}]>}  A promise to the properties.
  */
-const getItems = function(options, limit = 10) {
+const getItems = function (options, limit = 10) {
   const queryParams = [];
   let queryCondition = '';
 
@@ -78,7 +78,7 @@ const getItems = function(options, limit = 10) {
     });
 };
 
-const getItemsShallow = function(options) {
+const getItemsShallow = function (options) {
   const queryParams = [];
   let queryCondition = '';
 
@@ -87,7 +87,7 @@ const getItemsShallow = function(options) {
   FROM items
   `;
 
-  console.log("this is the options val: " , options);
+  console.log("this is the options val: ", options);
 
   if (options.text) {
     queryParams.push(`%${options.text}%`);
@@ -114,8 +114,8 @@ const getItemsShallow = function(options) {
  * @param {{}} property An object containing all of the item details.
  * @return {Promise<{}>} A promise to the items.
  */
-const addItem = function(item) {
-  return pool
+const addItem = function (item) {
+  return db
     .query(
       `INSERT INTO items
     (owner_id, title, description, price, cover_photo_url, thumbnail_photo1_url, thumbnail_photo2_url, thumbnail_photo3_url,
@@ -123,7 +123,7 @@ const addItem = function(item) {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 'new' )
     RETURNING *;`,
       [item.owner_id, item.title, item.description, item.price, item.cover_photo_url, item.thumbnail_photo1_url,
-        item.thumbnail_photo2_url, item.thumbnail_photo3_url, item.province, item.city, item.community ])
+      item.thumbnail_photo2_url, item.thumbnail_photo3_url, item.province, item.city, item.community])
     .then((result) => {
       console.log(result);
       return result.rows;
@@ -141,8 +141,8 @@ const addItem = function(item) {
  * @param {{status: string, item_id: integer}} user
  * @return {Promise<{}>} A promise to the items.
  */
-const updateItemStatusWithItemId = function(item) {
-  return pool
+const updateItemStatusWithItemId = function (item) {
+  return db
     .query(
       `UPDATE items
       SET status = $1
