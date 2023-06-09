@@ -66,6 +66,14 @@ $(document).ready(function() {
     views_manager.show('newItem');
   });
 
+  //Listener for redirect to home page
+  $("#icon-title").hover(function(event) {
+    $(this).css('cursor', 'pointer');
+  });
+
+  $("#icon-title").on('click', function() {
+    window.location.href="/";
+  });
 
   function getAllItems(inputParam) {
     let url = "/api/items";
@@ -164,7 +172,7 @@ $(document).ready(function() {
           const jCity = "<Strong>City :</strong>" + j.city;
           const jComm = "<Strong>Comm :</strong>" + j.community;
           const jProv = "<Strong>Prov :</strong>" + j.province;
-          const jPrice = "<Strong>Price :</strong>" + j.price;
+          const jPrice = "<Strong>Price :</strong>" + "$" + (j.price/100).toFixed(2);
           const jTitle = "<h3>" + j.title + "</h3>";
 
           openModal(jTitle, j.cover_photo_url, j.thumbnail_photo1_url,
@@ -184,6 +192,7 @@ $(document).ready(function() {
 
 
 
+    listed
     function getMyItems() {
       let url = "/api/items/listedItems";
       return $.ajax(url, { method: 'GET' });
@@ -293,6 +302,12 @@ $(document).ready(function() {
 
       });
     });
+
+  //Listener for get listed items
+  $("#get-listed-items").submit(function(event) {
+    event.preventDefault();
+    userId = cookies.userId;
+    console.log("this is the userId :", userId);
   });
 
 

@@ -56,7 +56,7 @@ $(document).ready(function () {
     const $form = $(this);
     const title = $form.find("#title-input").val();
     const description = $form.find("#desc-input-area").val();
-    const price = $form.find("#price-input").val();
+    const price = $form.find("#price-input").val()*100;
     const coverPhoto = $form.find("#cover-photo").val();
     const altPhoto1 = $form.find("#a-photo1-input").val();
     const altPhoto2 = $form.find("#a-photo2-input").val();
