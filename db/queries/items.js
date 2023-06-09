@@ -69,7 +69,7 @@ const getItems = function(options, limit = 10) {
   queryString += queryCondition;
 
   queryString += `
-  ORDER BY price
+  ORDER BY price, id
   LIMIT $${queryParams.length};
   `;
 
@@ -88,7 +88,6 @@ const getItemsShallow = function(options) {
   let queryString = `
   SELECT *
   FROM items
-  ORDER BY id
   `;
 
   //console.log("this is the options val: ", options);
@@ -98,6 +97,7 @@ const getItemsShallow = function(options) {
     queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} OR title LIKE $${queryParams.length} `;
   }
   queryString += queryCondition;
+  queryString += "ORDER BY id";
 
 
   console.log(queryString, queryParams);
@@ -116,7 +116,6 @@ const getItemsListed = function(options) {
   let queryString = `
   SELECT *
   FROM items
-  ORDER BY id
   `;
 
 
@@ -125,6 +124,7 @@ const getItemsListed = function(options) {
     queryCondition += `WHERE owner_id::text = $${queryParams.length}`;
   }
   queryString += queryCondition;
+  queryString += "ORDER BY id";
 
   console.log(queryString, queryParams);
   return db.query(queryString, queryParams)
@@ -151,6 +151,7 @@ const getItemId = function(options) {
     queryCondition += `WHERE id::text LIKE $${queryParams.length}`;
   }
   queryString += queryCondition;
+  queryString += "ORDER BY id";
 
   // queryString += `
   // LIMIT $${queryParams.length};
@@ -216,4 +217,4 @@ const updateItemStatusWithItemId = function(item) {
   };
 };
 
-module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow, getItemId, getItemsListed};
+module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow, getItemId, getItemsListed };
