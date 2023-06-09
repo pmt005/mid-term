@@ -8,7 +8,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { getItemsShallow, getItems, addItem } = require('../db/queries/items');
+const { getItemsShallow, getItems, addItem, getItemId } = require('../db/queries/items');
 const database = require("../db/connection");
 const db = require('../db/connection');
 
@@ -32,10 +32,21 @@ router.post("/items", (req, res) => {
 
 
 router.get("/items", (req, res) => {
-  //console.log("This is the new route", req.query);
+  console.log("This is the new route", req.query);
   getItemsShallow(req.query, 5)
     .then((items) => res.send({ items }))
     .catch((e) => {
+      console.error(e);
+      console.log("This is the error");
+      res.send(e);
+    });
+});
+
+router.get("/id/:id", (req, res) => {
+  console.log("Here I am", req.params);
+    getItemId(req.params)
+     .then((items) => res.send({ items }))
+     .catch((e) => {
       console.error(e);
       console.log("This is the error");
       res.send(e);

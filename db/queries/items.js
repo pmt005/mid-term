@@ -8,7 +8,7 @@ const db = require('../connection');
  * @param {*} limit The number of results to return.
  * @return {Promise<[{}]>}  A promise to the properties.
  */
-const getItems = function (options, limit = 10) {
+const getItems = function(options, limit = 10) {
   const queryParams = [];
   let queryCondition = '';
 
@@ -19,7 +19,10 @@ const getItems = function (options, limit = 10) {
   FROM items
   `;
 
-
+  if (options.id) {
+    queryParams.push(`%${options.id}%`);
+    queryCondition += !queryCondition ? `WHERE id LIKE $${queryParams.length} ` : `AND id LIKE $${queryParams.length} `;
+  }
 
 
   if (options.title) {
@@ -78,7 +81,7 @@ const getItems = function (options, limit = 10) {
     });
 };
 
-const getItemsShallow = function (options) {
+const getItemsShallow = function(options) {
   const queryParams = [];
   let queryCondition = '';
 
@@ -87,11 +90,40 @@ const getItemsShallow = function (options) {
   FROM items
   `;
 
-  console.log("this is the options val: ", options);
+  //console.log("this is the options val: ", options);
 
   if (options.text) {
     queryParams.push(`%${options.text}%`);
     queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} OR title LIKE $${queryParams.length} `;
+  }
+  queryString += queryCondition;
+
+  // queryString += `
+  // LIMIT $${queryParams.length};
+  // `;
+  console.log(queryString, queryParams);
+  return db.query(queryString, queryParams)
+    .then((res) => res.rows)
+    .catch((err) => {
+      console.log(err.message);
+      throw err;
+    });
+};
+
+const getItemId = function(options) {
+  const queryParams = [];
+  let queryCondition = '';
+
+  let queryString = `
+  SELECT *
+  FROM items
+  `;
+
+  console.log("this is the options val: ", options.id[0]);
+
+  if (options.id) {
+    queryParams.push(`%${options.id[0]}%`);
+    queryCondition += `WHERE id::text LIKE $${queryParams.length}`;
   }
   queryString += queryCondition;
 
@@ -114,7 +146,7 @@ const getItemsShallow = function (options) {
  * @param {{}} property An object containing all of the item details.
  * @return {Promise<{}>} A promise to the items.
  */
-const addItem = function (item) {
+const addItem = function(item) {
   return db
     .query(
       `INSERT INTO items
@@ -141,8 +173,8 @@ const addItem = function (item) {
  * @param {{status: string, item_id: integer}} user
  * @return {Promise<{}>} A promise to the items.
  */
-const updateItemStatusWithItemId = function (item) {
-  const updateItemStatusWithItemId = function (item) {
+const updateItemStatusWithItemId = function(item) {
+  const updateItemStatusWithItemId = function(item) {
     return db
       .query(
         `UPDATE items
@@ -159,4 +191,4 @@ const updateItemStatusWithItemId = function (item) {
   };
 };
 
-module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow };
+module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow, getItemId};
