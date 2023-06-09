@@ -45,15 +45,7 @@ $(document).ready(function () {
         </form>
       </div>
       <div id="fav">
-<<<<<<< HEAD
         <form id="get-listed-items">
-=======
-
-      <form action="/post" method="GET" id="get-listed-items">
-
-      <form action="/api/items/listedItems" method="GET" id="get-listed-items">
-
->>>>>>> 4edcd17d9076456bb95c6e69f24c8dafa44d1e50
           <button type="submit" class="user-icon"><img src="/icons/sales.png" id = "icon"> </button>
           <span id="creators"> <strong>Listed<br></strong></span>
         </form>
