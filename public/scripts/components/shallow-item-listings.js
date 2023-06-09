@@ -19,9 +19,6 @@ $(() => {
   window.shallowItemListings.clearShallowListings = clearShallowListings;
 
   const addShallowListings = function(items) {
-
-
-
     clearShallowListings();
     for (const itemId in items) {
       const item = items[itemId];

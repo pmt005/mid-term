@@ -98,9 +98,32 @@ const getItemsShallow = function(options) {
   }
   queryString += queryCondition;
 
-  // queryString += `
-  // LIMIT $${queryParams.length};
-  // `;
+
+  console.log(queryString, queryParams);
+  return db.query(queryString, queryParams)
+    .then((res) => res.rows)
+    .catch((err) => {
+      console.log(err.message);
+      throw err;
+    });
+};
+
+const getItemsListed = function(options) {
+  const queryParams = [];
+  let queryCondition = '';
+
+  let queryString = `
+  SELECT *
+  FROM items
+  `;
+
+
+  if (options.text) {
+    queryParams.push(`${options.text}`);
+    queryCondition += `WHERE owner_id::text = $${queryParams.length}`;
+  }
+  queryString += queryCondition;
+
   console.log(queryString, queryParams);
   return db.query(queryString, queryParams)
     .then((res) => res.rows)
@@ -191,4 +214,4 @@ const updateItemStatusWithItemId = function(item) {
   };
 };
 
-module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow, getItemId};
+module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow, getItemId, getItemsListed};

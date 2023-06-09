@@ -187,7 +187,8 @@ $(document).ready(function() {
   //Listener for get listed items
   $("#get-listed-items").submit(function(event) {
     event.preventDefault();
-    console.log("listed button");
+    userId = cookies.userId;
+    console.log("this is the userId :" , userId);
   });
 
   //Listener for saved items

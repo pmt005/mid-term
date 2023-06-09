@@ -12,38 +12,6 @@ const userQueries = require('../db/queries/users');
 //const {getItemsShallow} = require('../db/queries/items');
 const database = require("../db/connection");
 
-router.post("/items", (req,res) => {
-
-  const userId = 1;
-  if (!userId) {
-    return res.send({ error: "error" });
-  }
-
-
-  const newItem = req.body;
-  newItem.owner_id = userId;
-  /*database
-    .addItem(newItem)
-    .then((item) => res.send({ item }))
-    .catch((e) => {
-      console.error(e);
-      res.send(e);
-    });
-    */
-
-  res.send("this works ");
-});
-
-router.get("/items", (req, res) => {
-console.log("This is req.query" , req.query);
-  getItemsShallow(req.query, 5)
-    .then((items) => res.send({ items }))
-    .catch((e) => {
-      console.error(e);
-      console.log("This is the error");
-      res.send(e);
-    });
-});
 
 
 

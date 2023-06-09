@@ -8,9 +8,22 @@
 
 const express = require('express');
 const router = express.Router();
-const { getItemsShallow, getItems, addItem, getItemId } = require('../db/queries/items');
+const { getItemsShallow, getItems, addItem, getItemId, getItemsListed } = require('../db/queries/items');
 const database = require("../db/connection");
 const db = require('../db/connection');
+
+
+router.get("/items/listedItems", (req, res) => {
+  const userId = req.session.user_id;
+  console.log(" you made it here" + userId);
+  getItemsListed(userId)
+    .then((items) => res.send({ items }))
+    .catch((e) => {
+      console.error(e);
+      console.log("This is the error");
+      res.send(e);
+    });
+});
 
 router.post("/items", (req, res) => {
   const userId = 1; // Assuming the user ID is hardcoded as 1 for now
@@ -42,11 +55,13 @@ router.get("/items", (req, res) => {
     });
 });
 
+
+
 router.get("/id/:id", (req, res) => {
   console.log("Here I am", req.params);
-    getItemId(req.params)
-     .then((items) => res.send({ items }))
-     .catch((e) => {
+  getItemId(req.params)
+    .then((items) => res.send({ items }))
+    .catch((e) => {
       console.error(e);
       console.log("This is the error");
       res.send(e);
