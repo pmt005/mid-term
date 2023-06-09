@@ -34,7 +34,7 @@ $(document).ready(function() {
         </form>
       </div>
       <div id="fav">
-        <form action="/api/items/listedItems" method="GET" id="get-listed-items">
+      <form action="/post" method="GET" id="get-listed-items">
           <button type="submit" class="user-icon"><img src="/icons/sales.png" id = "icon"> </button>
           <span id="creators"> <strong>Listed<br></strong></span>
         </form>
@@ -49,7 +49,7 @@ $(document).ready(function() {
     </header>
 
       `;
-
+//
     $pageHeader.append(header);
   }
   window.header.update = updateHeader;
@@ -150,6 +150,7 @@ $(document).ready(function() {
 
       $(".item").on('click', function(event) {
         event.preventDefault();
+        console.log("THIS IS THE TEST");
         let tempItemId = event.currentTarget.dataset.id;
 
         console.log(tempItemId[0]);
@@ -189,7 +190,7 @@ $(document).ready(function() {
     }
 
     //Listener for get listed items
-    $("#get-listed-items").submit(function(event) {
+    $("#icon").on('click',function(event) {
       event.preventDefault();
       getMyItems().then(function(json) {
         console.log(json);
