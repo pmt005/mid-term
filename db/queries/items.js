@@ -90,7 +90,7 @@ const getItemsShallow = function(options) {
   FROM items
   `;
 
-  //console.log("this is the options val: ", options);
+  console.log("this is the options val: ", options);
 
   if (options.text) {
     queryParams.push(`%${options.text}%`);
@@ -111,16 +111,16 @@ const getItemsShallow = function(options) {
 const getItemsListed = function(options) {
   const queryParams = [];
   let queryCondition = '';
-
+  console.log("this is the options val YYY: ", options.user_id);
   let queryString = `
   SELECT *
   FROM items
   `;
 
 
-  if (options.text) {
-    queryParams.push(`${options.text}`);
-    queryCondition += `WHERE owner_id::text = $${queryParams.length}`;
+  if (options) {
+    queryParams.push(`${options.user_id}`);
+    queryCondition += `WHERE owner_id = $${queryParams.length}`;
   }
   queryString += queryCondition;
 

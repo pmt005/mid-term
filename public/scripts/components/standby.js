@@ -34,16 +34,6 @@ $(document).ready(function() {
 
 
 
-  // const inputItems = getItemsShallow("");
-  // addStandbyListings(json.items);
-  // views_manager.show('standby');
-
-
-  // getAllItems("").then(function(json) {
-  //   console.log(json.items);
-  //   addStandbyListings(json.items);
-  //   views_manager.show('standby');
-  // });
 
 
 
