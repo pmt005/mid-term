@@ -26,6 +26,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   overflow-y:auto;
+  position: relative;
   background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
 }
 

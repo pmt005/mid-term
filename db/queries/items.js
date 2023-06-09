@@ -89,6 +89,61 @@ const getItemsShallow = function (options) {
   }
 
   queryString += queryCondition;
+  queryString += "ORDER BY id";
+
+
+  console.log(queryString, queryParams);
+  return db.query(queryString, queryParams)
+    .then((res) => res.rows)
+    .catch((err) => {
+      console.log(err.message);
+      throw err;
+    });
+};
+
+const getItemsListed = function (options) {
+  const queryParams = [];
+  let queryCondition = '';
+  console.log("this is the options val YYY: ", options.user_id);
+  let queryString = `
+  SELECT *
+  FROM items
+  `;
+
+
+  if (options) {
+    queryParams.push(`${options.user_id}`);
+    queryCondition += `WHERE owner_id = $${queryParams.length}`;
+  }
+  queryString += queryCondition;
+  queryString += "ORDER BY id";
+
+  console.log(queryString, queryParams);
+  return db.query(queryString, queryParams)
+    .then((res) => res.rows)
+    .catch((err) => {
+      console.log(err.message);
+      throw err;
+    });
+};
+
+const getItemId = function (options) {
+  const queryParams = [];
+  let queryCondition = '';
+
+  let queryString = `
+  SELECT *
+  FROM items
+  `;
+
+  console.log("this is the options val: ", options.id[0]);
+
+  if (options.id) {
+    queryParams.push(`%${options.id[0]}%`);
+    queryCondition += `WHERE id::text LIKE $${queryParams.length}`;
+  }
+  queryString += queryCondition;
+  queryString += "ORDER BY id";
 
   return db.query(queryString, queryParams)
     .then((res) => res.rows)
