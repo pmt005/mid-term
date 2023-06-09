@@ -88,6 +88,7 @@ const getItemsShallow = function(options) {
   let queryString = `
   SELECT *
   FROM items
+  ORDER BY id
   `;
 
   //console.log("this is the options val: ", options);
@@ -115,6 +116,7 @@ const getItemsListed = function(options) {
   let queryString = `
   SELECT *
   FROM items
+  ORDER BY id
   `;
 
 
