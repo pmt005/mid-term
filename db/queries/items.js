@@ -1,29 +1,18 @@
 const db = require('../connection');
 
-/// Items
-
 /**
  * Get all items.
  * @param {{}} options An object containing query options.
- * @param {*} limit The number of results to return.
- * @return {Promise<[{}]>}  A promise to the properties.
+ * @param {number} limit The number of results to return.
+ * @return {Promise<[{}]>} A promise to the items.
  */
-const getItems = function(options, limit = 10) {
+const getItems = function (options, limit = 10) {
   const queryParams = [];
   let queryCondition = '';
-
-
-
   let queryString = `
-  SELECT *
-  FROM items
+    SELECT *
+    FROM items
   `;
-
-  if (options.id) {
-    queryParams.push(`%${options.id}%`);
-    queryCondition += !queryCondition ? `WHERE id LIKE $${queryParams.length} ` : `AND id LIKE $${queryParams.length} `;
-  }
-
 
   if (options.title) {
     queryParams.push(`%${options.title}%`);
@@ -65,13 +54,13 @@ const getItems = function(options, limit = 10) {
     queryCondition += !queryCondition ? `WHERE status = $${queryParams.length} ` : `AND status = $${queryParams.length} `;
   }
 
-
   queryString += queryCondition;
-
   queryString += `
-  ORDER BY price, id
-  LIMIT $${queryParams.length};
+    ORDER BY price
+    LIMIT $${queryParams.length + 1};
   `;
+
+  queryParams.push(limit);
 
   return db.query(queryString, queryParams)
     .then((res) => res.rows)
@@ -81,21 +70,24 @@ const getItems = function(options, limit = 10) {
     });
 };
 
-const getItemsShallow = function(options) {
+/**
+ * Get items based on a shallow search.
+ * @param {{ text: string }} options An object containing the search text.
+ * @return {Promise<[{}]>} A promise to the items.
+ */
+const getItemsShallow = function (options) {
   const queryParams = [];
   let queryCondition = '';
-
   let queryString = `
-  SELECT *
-  FROM items
+    SELECT *
+    FROM items
   `;
-
-  //console.log("this is the options val: ", options);
 
   if (options.text) {
     queryParams.push(`%${options.text}%`);
     queryCondition += `WHERE city LIKE $${queryParams.length} OR description LIKE $${queryParams.length} OR title LIKE $${queryParams.length} `;
   }
+
   queryString += queryCondition;
   queryString += "ORDER BY id";
 
@@ -109,19 +101,19 @@ const getItemsShallow = function(options) {
     });
 };
 
-const getItemsListed = function(options) {
+const getItemsListed = function (options) {
   const queryParams = [];
   let queryCondition = '';
-
+  console.log("this is the options val YYY: ", options.user_id);
   let queryString = `
   SELECT *
   FROM items
   `;
 
 
-  if (options.text) {
-    queryParams.push(`${options.text}`);
-    queryCondition += `WHERE owner_id::text = $${queryParams.length}`;
+  if (options) {
+    queryParams.push(`${options.user_id}`);
+    queryCondition += `WHERE owner_id = $${queryParams.length}`;
   }
   queryString += queryCondition;
   queryString += "ORDER BY id";
@@ -135,7 +127,7 @@ const getItemsListed = function(options) {
     });
 };
 
-const getItemId = function(options) {
+const getItemId = function (options) {
   const queryParams = [];
   let queryCondition = '';
 
@@ -153,10 +145,6 @@ const getItemId = function(options) {
   queryString += queryCondition;
   queryString += "ORDER BY id";
 
-  // queryString += `
-  // LIMIT $${queryParams.length};
-  // `;
-  console.log(queryString, queryParams);
   return db.query(queryString, queryParams)
     .then((res) => res.rows)
     .catch((err) => {
@@ -166,55 +154,94 @@ const getItemId = function(options) {
 };
 
 
-
 /**
- * Add an item to the database
- * @param {{}} property An object containing all of the item details.
- * @return {Promise<{}>} A promise to the items.
+ * Add an item to the database.
+ * @param {{}} item An object containing all of the item details.
+ * @return {Promise<{}>} A promise to the added item.
  */
-const addItem = function(item) {
+const addItem = function (item) {
   return db
     .query(
       `INSERT INTO items
-    (owner_id, title, description, price, cover_photo_url, thumbnail_photo1_url, thumbnail_photo2_url, thumbnail_photo3_url,
-     province, city, community, status)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 'new' )
-    RETURNING *;`,
-      [item.owner_id, item.title, item.description, item.price, item.cover_photo_url, item.thumbnail_photo1_url,
-      item.thumbnail_photo2_url, item.thumbnail_photo3_url, item.province, item.city, item.community])
-    .then((result) => {
-      console.log(result);
-      return result.rows;
-    })
+      (owner_id, title, description, price, cover_photo_url, thumbnail_photo1_url, thumbnail_photo2_url, thumbnail_photo3_url,
+      province, city, community, status)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 'new')
+      RETURNING *;`,
+      [
+        item.owner_id,
+        item.title,
+        item.description,
+        item.price,
+        item.cover_photo_url,
+        item.thumbnail_photo1_url,
+        item.thumbnail_photo2_url,
+        item.thumbnail_photo3_url,
+        item.province,
+        item.city,
+        item.community
+      ]
+    )
+    .then((result) => result.rows[0])
     .catch((err) => {
       console.log(err.message);
       throw err;
     });
-
 };
+const filterButton = document.getElementById('filter-button');
+
+// Add event listener to the filter button
+filterButton.addEventListener('click', filterByRange);
+
+function filterByRange() {
+  // Prompt the user for the minimum price
+  const minInput = prompt("Enter the minimum price:");
+
+  // Prompt the user for the maximum price
+  const maxInput = prompt("Enter the maximum price:");
+
+  // Convert the input price to numbers
+  const min = Number(minInput);
+  const max = Number(maxInput);
+
+  // Get the list of items to filter
+  const items = document.querySelectorAll('.item');
+
+  // Iterate over each item and check if it falls within the given range
+  items.forEach(item => {
+    const value = Number(item.textContent);
+    if (value >= min && value <= max) {
+      item.style.display = 'block'; // Show the item
+    } else {
+      item.style.display = 'none'; // Hide the item
+    }
+  });
+}
 
 
 /**
- * Update status of an item
- * @param {{status: string, item_id: integer}} user
- * @return {Promise<{}>} A promise to the items.
+ * Update the status of an item.
+ * @param {{ status: string, item_id: integer }} item An object containing the item status and ID.
+ * @return {Promise<{}>} A promise to the updated item.
  */
-const updateItemStatusWithItemId = function(item) {
-  const updateItemStatusWithItemId = function(item) {
-    return db
-      .query(
-        `UPDATE items
+const updateItemStatusWithItemId = function (item) {
+  return db
+    .query(
+      `UPDATE items
       SET status = $1
       WHERE item_id = $2;`,
-        [item])
-      .then((result) => {
-        return result.rows;
-      })
-      .catch((err) => {
-        console.log(err.message);
-        throw err;
-      });
-  };
+      [item.status, item.item_id]
+    )
+    .then((result) => result.rows[0])
+    .catch((err) => {
+      console.log(err.message);
+      throw err;
+    });
 };
 
-module.exports = { getItems, addItem, updateItemStatusWithItemId, getItemsShallow, getItemId, getItemsListed };
+module.exports = {
+  getItems,
+  addItem,
+  updateItemStatusWithItemId,
+  getItemsShallow,
+  filterByRange
+};

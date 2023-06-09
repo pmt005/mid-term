@@ -47,10 +47,8 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/api', itemRoutes);
 // Note: mount other resources here, using the same pattern abovee
+
 app.get('/login/:id', (req, res) => {
-  // set a cookie
-  //res.cookie('user_id', req.params.id);
-  //return res.send("<html><body>short URL does not exist</b></body></html>");
   console.log("here");
   req.session['user_id'] = req.params.id;
   console.log(req.session['user_id']);

@@ -16,7 +16,8 @@ const db = require('../db/connection');
 router.get("/items/listedItems", (req, res) => {
   const userId = req.session.user_id;
   console.log(" you made it here" + userId);
-  getItemsListed(userId)
+
+  getItemsListed({user_id: userId})
     .then((items) => res.send({ items }))
     .catch((e) => {
       console.error(e);
