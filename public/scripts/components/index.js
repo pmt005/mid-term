@@ -84,10 +84,6 @@ $(() => {
     $(".item").on('click',function(event) {
       event.preventDefault();
       let tempItemId = event.currentTarget.dataset.id;
-
-      console.log(tempItemId[0]);
-      const tempItemTitle = event.currentTarget.dataset.title;
-
       getAllItemsId(tempItemId).then(function(json) {
         const j = json.items[0];
         console.log(j.city);
