@@ -5,7 +5,7 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-
+const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -14,6 +14,7 @@ app.set('view engine', 'ejs');
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 // app.use(
@@ -41,7 +42,12 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/api', itemRoutes);
 // Note: mount other resources here, using the same pattern abovee
-
+app.get('/login/:id', (req, res) => {
+  // set a cookie
+  res.cookie('user_id', req.params.id);
+  console.log("this is set");
+  res.redirect('/');
+});
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
