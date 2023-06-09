@@ -2,7 +2,7 @@
 /* eslint-disable func-style */
 
 
-$(document).ready(function() {
+$(document).ready(function () {
   window.header = {};
 
   const $pageHeader = $('#page-header');
@@ -23,7 +23,18 @@ $(document).ready(function() {
               <input type="text" name="text" id="search-text" placeholder="search"></textarea>
               <button type="submit" class ="filter-button" id="keyword-search-button">Search</button>
           </form>
-          <button type="submit" class="filter-button">filter</button>
+          <button type="button" class="filter-button" onclick="toggleFilterForm()">Filter</button>
+
+          <div id="filter-form" style="display: none;">
+            <label for="min-input">Minimum:</label>
+            <input type="number" id="min-input" placeholder="Enter minimum value">
+          
+            <label for="max-input">Maximum:</label>
+            <input type="number" id="max-input" placeholder="Enter maximum value">
+          
+            <button type="submit" onclick="filterByRange()">Apply</button>
+          </div>
+          
         </div>
       </div>
     <div id="top-right">
@@ -60,7 +71,7 @@ $(document).ready(function() {
   const $savedItems = $postForm.parent().find("#container-to-vanish-saved");
 
   //Listener for post new item submit to get post new item form
-  $("#get-post-form").on('click', function(event) {
+  $("#get-post-form").on('click', function (event) {
     event.preventDefault();
     console.log("arrived");
     views_manager.show('newItem');
@@ -72,14 +83,14 @@ $(document).ready(function() {
     if (inputParam) {
       url += "?" + inputParam;
     }
-    return $.ajax(url,{method: 'GET'});
+    return $.ajax(url, { method: 'GET' });
   }
 
-  $keywordSearch.submit(function(event) {
+  $keywordSearch.submit(function (event) {
     event.preventDefault();
     const data = $(this).serialize();
     console.log("keyword search data: " + data);
-    getAllItems(data).then(function(json) {
+    getAllItems(data).then(function (json) {
       console.log(json.items);
       shallowItemListings.addShallowListings(json.items);
       views_manager.show('shallowListings');
@@ -88,13 +99,13 @@ $(document).ready(function() {
   });
 
   //Listener for get listed items
-  $("#get-listed-items").submit(function(event) {
+  $("#get-listed-items").submit(function (event) {
     event.preventDefault();
     console.log("listed button");
   });
 
   //Listener for saved items
-  $("#get-saved-items").submit(function(event) {
+  $("#get-saved-items").submit(function (event) {
     event.preventDefault();
     $savedItems.slideToggle();
     console.log("saved button");
