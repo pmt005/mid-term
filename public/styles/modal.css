@@ -32,6 +32,10 @@
   border-bottom: solid rgba(127, 123, 131, 0.712) 2px;;
 }
 
+#mTitle{
+  max-width: 75%;
+}
+
 .container2{
   display: flex;
   justify-content: center;
