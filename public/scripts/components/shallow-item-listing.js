@@ -13,7 +13,7 @@ $(() => {
           <img src="${inputItem.cover_photo_url}">
         </div>
         <div id="item-info">
-          <span><strong>Price:  </strong>${inputItem.price}</span>
+          <span><strong>Price:  </strong>${"$" + (inputItem.price/100).toFixed(2)}</span>
           <br>
         <span><strong>Title:  </strong>${inputItem.title}</span>
         <br>

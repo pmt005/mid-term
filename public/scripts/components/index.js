@@ -92,7 +92,7 @@ $(() => {
         const jCity = "<Strong>City :</strong>" + j.city;
         const jComm = "<Strong>Comm :</strong>" + j.community;
         const jProv = "<Strong>Prov :</strong>" + j.province;
-        const jPrice = "<Strong>Price :</strong>" + j.price;
+        const jPrice = "<Strong>Price :</strong>" + "$" + (j.price/100).toFixed(2);
         const jTitle = "<h3>" + j.title + "</h3>";
 
         openModal(jTitle,j.cover_photo_url,j.thumbnail_photo1_url,
